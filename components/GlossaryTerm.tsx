@@ -1,5 +1,5 @@
 // ファイルパス: components/GlossaryTerm.tsx
-import { Tooltip } from "@/components/ui/tooltip"; // 自作Tooltipをインポート
+import { Tooltip } from "@/components/ui/Tooltip"; // 自作Tooltipをインポート
 import { glossary } from "@/app/rule/glossary-data";
 
 export const GlossaryTerm = ({ term }: { term: keyof typeof glossary }) => {
