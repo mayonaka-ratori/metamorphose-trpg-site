@@ -4,6 +4,11 @@
 import Link from 'next/link';
 import { PageContainer } from '@/components/PageContainer'; 
 import { useState } from 'react';
+import { TableOfContents } from '@/components/rule/TableOfContents';
+import { AutoGlossary } from '@/components/rule/AutoGlossary';
+import { SearchModal } from '@/components/rule/SearchModal';
+// ↓ 追加インポート
+import { NextChapter } from '@/components/ui/NextChapter';
 
 const PreparationItemCard = ({ title, children }: { title: string, children: React.ReactNode }) => {
   return (
@@ -27,10 +32,15 @@ export default function RulePage() {
 
   return (
     <PageContainer>
-      <h1 className="mb-8 border-b border-zinc-800 pb-4 text-4xl font-bold text-teal-400">ルール</h1>
+      <div className="mb-8 flex flex-col gap-4 border-b border-zinc-800 pb-4 md:flex-row md:items-center md:justify-between">
+        <h1 className="text-4xl font-bold text-teal-400">ルール</h1>
+        <div className="md:hidden">
+          <SearchModal />
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 gap-x-12 md:grid-cols-4">
-        {/* --- スマートフォン用の開閉式目次 --- */}
+        {/* --- SP用目次 --- */}
         <div className="mb-8 md:hidden">
           <button
             onClick={() => setIsTocOpen(!isTocOpen)}
@@ -61,39 +71,29 @@ export default function RulePage() {
           )}
         </div>
 
-        {/* --- PC用の固定目次 --- */}
+        {/* --- PC用目次 --- */}
         <aside className="hidden md:col-span-1 md:block">
-          <nav className="sticky top-24">
-            <h3 className="mb-4 font-bold text-zinc-400">目次</h3>
-            <ul className="space-y-3">
-              {tocLinks.map(link => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-zinc-400 transition-colors hover:text-white">
-                    {link.text}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <TableOfContents items={tocLinks} />
         </aside>
 
-        {/* --- 右カラム：コンテンツ --- */}
+        {/* --- コンテンツ --- */}
         <div className="md:col-span-3">
-          <article className="space-y-12 leading-relaxed text-zinc-300">
-            <section id="whats-metamorphose">
+          <article className="space-y-16 leading-relaxed text-zinc-300">
+            
+            <section id="whats-metamorphose" className="scroll-mt-24">
               <h2 className="mb-4 text-2xl font-bold text-teal-400">『メタモルフォゼ』とは？</h2>
               <div className="space-y-4">
-                <p>ここは、現代によく似た世界。ひとつだけ違うのは、人間がおぞましい怪物に変貌してしまう『怪化現象』があること。</p>
-                <p>ひとたび変貌が起きれば、止める術はない。人でなく、まだ怪物でもない存在は「変貌者」と呼ばれ、やがて変貌が進行し、姿も精神も人から離れていくうち、ワタシはワタシでなくなり、怪物に成り果てる――。</p>
-                <p>そんな『怪化現象』のある世界で、変貌者と人間の織り成す物語を紡いでみませんか？</p>
+                <p><AutoGlossary>ここは、現代によく似た世界。ひとつだけ違うのは、人間がおぞましい怪物に変貌してしまう『怪化現象』があること。</AutoGlossary></p>
+                <p><AutoGlossary>ひとたび変貌が起きれば、止める術はない。人でなく、まだ怪物でもない存在は「変貌者」と呼ばれ、やがて変貌が進行し、姿も精神も人から離れていくうち、ワタシはワタシでなくなり、怪物に成り果てる――。</AutoGlossary></p>
+                <p><AutoGlossary>そんな『怪化現象』のある世界で、変貌者と人間の織り成す物語を紡いでみませんか？</AutoGlossary></p>
               </div>
             </section>
 
-            <section id="what-can-do">
+            <section id="what-can-do" className="scroll-mt-24">
               <h2 className="mb-4 text-2xl font-bold text-teal-400">『メタモルフォゼ』でできること</h2>
               <div className="space-y-4">
                 <p>『メタモルフォゼ』は、専任の進行役（ＧＭ）なしに、ボイスセッションで１時間から遊べる、ロールプレイ重視のTRPGです。</p>
-                <p>あなたが演じるキャラクターは、怪物へと変貌していく「変貌者」か、そんな変貌者とかかわりを持つ「人間」。</p>
+                <p><AutoGlossary>あなたが演じるキャラクターは、怪物へと変貌していく「変貌者」か、そんな変貌者とかかわりを持つ「人間」。</AutoGlossary></p>
                 <div>
                   <p className="font-bold text-zinc-100">変貌者なら……</p>
                   <ul className="list-inside list-disc pl-2">
@@ -107,40 +107,40 @@ export default function RulePage() {
                   <ul className="list-inside list-disc pl-2">
                     <li>変わりゆく大切な人を守るため奔走する</li>
                     <li>完全な怪物となる前に、大切な人を手にかけようとする</li>
-                    <li>怪物や変貌者を私欲のために利用しようとする</li>
+                    <li><AutoGlossary>怪物や変貌者を私欲のために利用しようとする</AutoGlossary></li>
                   </ul>
                 </div>
-                <p>……など、「人が怪物に変貌する世界」を舞台に多様な物語を深く味わうことができます。</p>
+                <p><AutoGlossary>……など、「人が怪物に変貌する世界」を舞台に多様な物語を深く味わうことができます。</AutoGlossary></p>
               </div>
             </section>
 
-            <section id="worldview">
+            <section id="worldview" className="scroll-mt-24">
               <h2 className="mb-4 text-2xl font-bold text-teal-400">世界観紹介</h2>
               <div className="space-y-4">
-                <p>『怪化現象』とは、なんの前触れもなく、人間から怪物への変貌がはじまること。</p>
+                <p><AutoGlossary>『怪化現象』とは、なんの前触れもなく、人間から怪物への変貌がはじまること。</AutoGlossary></p>
                 <ul className="list-inside list-disc pl-2">
                   <li>異形化や姿かたちの変化</li>
                   <li>異能や特殊能力</li>
                   <li>趣味嗜好や精神性の大幅な変化</li>
                 </ul>
                 <p>など、変貌にこれといって決まったルールはありません。</p>
-                <p>確実なのは、いずれ必ず怪物となること。怪物はこの世界において駆除対象であること。そして、変貌者を人間と怪物のどちらとみなすかは、人による、ということです。</p>
+                <p><AutoGlossary>確実なのは、いずれ必ず怪物となること。怪物はこの世界において駆除対象であること。そして、変貌者を人間と怪物のどちらとみなすかは、人による、ということです。</AutoGlossary></p>
               </div>
             </section>
 
-            <section id="game-system">
+            <section id="game-system" className="scroll-mt-24">
               <h2 className="mb-4 text-2xl font-bold text-teal-400">ゲームシステム紹介</h2>
               <div className="space-y-4">
                 <p>『メタモルフォゼ』は、シナリオという物語の単位で遊びます。シナリオごとに期初転結があり、登場キャラクターが置かれる状況も異なります。</p>
-                <p>変貌者は、シナリオ中に【変貌の進行】によって、体や心が変貌していきます。その人をその人たらしめるものが消えてゆき、やがて怪物に成り果てるのです。また人間にも『怪化現象』が発生することがあります（プレイヤーが任意に起こすこともできます）。</p>
+                <p><AutoGlossary>変貌者は、シナリオ中に【変貌の進行】によって、体や心が変貌していきます。その人をその人たらしめるものが消えてゆき、やがて怪物に成り果てるのです。また人間にも『怪化現象』が発生することがあります（プレイヤーが任意に起こすこともできます）。</AutoGlossary></p>
                 <div>
                   <p className="font-bold text-zinc-100">★チェックポイント</p>
-                  <p>自分が自分ではなくなっていく。知っている人がバケモノになっていく。そういった状況で生まれるドラマや感情の動きを、思う存分味わうために「チェックポイント」というルールがあります。これは、シナリオの各場面で起きる重要な出来事を指定するものです。チェックポイントは、プレイヤー側で用意することもできます。</p>
+                  <p><AutoGlossary>自分が自分ではなくなっていく。知っている人がバケモノになっていく。そういった状況で生まれるドラマや感情の動きを、思う存分味わうために「チェックポイント」というルールがあります。これは、シナリオの各場面で起きる重要な出来事を指定するものです。</AutoGlossary></p>
                 </div>
               </div>
             </section>
             
-            <section id="what-to-prepare">
+            <section id="what-to-prepare" className="scroll-mt-24">
               <h2 className="mb-4 text-2xl font-bold text-teal-400">用意するもの</h2>
               <div className="space-y-6">
                 <PreparationItemCard title="ルールブック">
@@ -161,6 +161,13 @@ export default function RulePage() {
                 </PreparationItemCard>
               </div>
             </section>
+
+            {/* ↓ ここに次への導線を追加 */}
+            <NextChapter 
+              title="シナリオを探す" 
+              description="ルールを把握したら、次は遊ぶシナリオを見つけましょう。様々な物語があなたを待っています。"
+              href="/scenarios"
+            />
           </article>
         </div>
       </div>

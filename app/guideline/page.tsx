@@ -6,7 +6,6 @@ export default function GuidelinePage() {
   return (
     <PageContainer maxWidth="max-w-3xl">
       <div className="mb-8 border-b border-zinc-800 pb-4">
-        {/* ↓ スマートフォン表示(md未満)での文字サイズを調整 */}
         <h1 className="text-3xl font-bold text-teal-400 md:text-4xl">
           『怪化と変貌のRPG メタモルフォゼ』
         </h1>
@@ -34,12 +33,28 @@ export default function GuidelinePage() {
           <p>＃＃＃＃＃＃</p>
         </div>
 
-        <p>
-          ※本作はTRPGライツ事務局によって策定された「テーブルトークRPGに関する二次創作活動のガイドライン」には批准していません。
-        </p>
-        <p className="font-bold text-zinc-200">
-          『スモールパブリッシャーリミテッドライセンス（SPLL）』の条件を満たすような活動を行う場合でも、申請の必要はありません。
-        </p>
+        {/* --- ↓ 追加・変更箇所: SPLLに関する特記事項 --- */}
+        <section className="my-12 rounded-xl border-l-4 border-teal-500 bg-zinc-900/50 p-8 shadow-lg">
+          <h2 className="mb-6 text-2xl font-bold text-teal-400">
+            ● 二次創作時にSPLLの申請は不要です
+          </h2>
+          <div className="space-y-4 text-zinc-200">
+            <p>
+              本作はTRPGライツ事務局によって策定された「テーブルトークRPG に関する二次創作活動のガイドライン」には批准していません。
+            </p>
+            <p>
+              『スモールパブリッシャーリミテッドライセンス（SPLL）』の条件を満たすような二次創作活動を行う場合でも、<strong className="text-white decoration-teal-500 underline decoration-2 underline-offset-4">申請の必要はありません。</strong>
+            </p>
+            <p>
+              上記のクレジット表記や素材使用のルールを守れば、好きなようにやってよい、ということです。
+            </p>
+            <p className="mt-4 rounded-md bg-red-900/20 p-4 text-sm font-bold text-red-300">
+              ※ただし、公式イラストを「有償配布物」に同梱することは禁じます。<br/>
+              （表紙や挿絵への使用はOKですが、素材としてそのまま再販売する行為はNGです）
+            </p>
+          </div>
+        </section>
+        {/* --- ↑ 追加ここまで --- */}
 
         <p>
           イラストを使用する場合には、以下の該当するイラストレーター名の名前を「イラスト：（イラストレーター名）」といった形式で表示してください。

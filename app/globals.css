@@ -1,37 +1,78 @@
 /* ファイルパス: app/globals.css */
 @import "tailwindcss";
 
-/* 
-  shadcn/uiが追記した可能性のある、
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-  といった古いディレクティブや、その他の設定をすべて削除し、
-  Tailwind CSS v4の正しい記述に戻します。
-*/
+/* --- 1. セマンティック変数の定義 --- */
+@theme {
+  /* 色の役割を定義 */
+  --color-bg-primary: #000000;      /* メイン背景：完全な黒 */
+  --color-bg-surface: #18181b;      /* カード等の表面：Zinc-900 */
+  --color-bg-surface-hover: #27272a; /* ホバー時：Zinc-800 */
+  
+  --color-text-primary: #f4f4f5;    /* メイン文字：Zinc-100 */
+  --color-text-secondary: #a1a1aa;  /* 補足文字：Zinc-400 */
+  
+  --color-accent: #2dd4bf;          /* アクセント：Teal-400 */
+  --color-accent-glow: rgba(45, 212, 191, 0.5); /* 発光表現用 */
 
-:root {
-  --background: 255 255 255; /* Light mode */
-  --foreground: 23 23 23;   /* Light mode */
+  /* フォント変数のマッピング */
+  --font-sans: var(--font-noto-sans-jp);
+  --font-display: var(--font-oswald);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: 38 38 38;   /* Dark mode (zinc-800) */
-    --foreground: 229 229 229; /* Dark mode (neutral-200) */
-  }
+/* --- 2. 基本設定 --- */
+:root {
+  /* ブラウザの背景色設定（スクロールバウンス時などの色） */
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  
+  /* スムーズスクロール */
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: rgb(var(--background));
-  color: rgb(var(--foreground));
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans), sans-serif;
+  -webkit-font-smoothing: antialiased; /* 文字を滑らかに */
 }
 
+/* --- 3. アクセシビリティ設定 --- */
 @layer base {
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold text-teal-400;
+  /* キーボードフォーカス時のスタイルを統一 */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
   }
+
+  /* 
+    "視差効果を減らす"設定をオンにしているユーザー向け 
+    アニメーションを一律オフにする配慮
+  */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: var(--color-accent);
+    font-family: var(--font-display), var(--font-sans), sans-serif;
+    letter-spacing: 0.05em; /* 見出しの文字間隔を少し広げる */
+  }
+  
   p {
-    @apply leading-loose;
+    line-height: 1.8;
+    color: var(--color-text-primary);
+  }
+  
+  a {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
   }
 }

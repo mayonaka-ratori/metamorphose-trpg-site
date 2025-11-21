@@ -1,6 +1,7 @@
 // ファイルパス: app/scenarios/page.tsx
 import { PageContainer } from '@/components/PageContainer';
 import { Button } from '@/components/ui/Button';
+import { NextChapter } from '@/components/ui/NextChapter'; // 追加
 import Image from 'next/image';
 
 const ScenarioCard = ({
@@ -25,34 +26,45 @@ const ScenarioCard = ({
   imageUrl?: string;
 }) => {
   return (
-    <section className="grid grid-cols-1 items-start gap-8 rounded-lg bg-zinc-900 p-4 md:grid-cols-3 md:bg-transparent md:p-0">
-      <div className="relative h-96 w-full overflow-hidden rounded-lg bg-zinc-800 md:col-span-1">
+    <section className="group grid grid-cols-1 items-start gap-8 rounded-lg border border-zinc-800/50 bg-zinc-900/30 p-6 transition-colors hover:border-zinc-700 hover:bg-zinc-900/80 md:grid-cols-3 md:p-8">
+      <div className="relative h-64 w-full overflow-hidden rounded-lg bg-zinc-800 shadow-lg md:col-span-1 md:h-full min-h-[250px]">
         <Image 
           src={imageUrl} 
           alt={title} 
           fill 
-          className="object-cover transition-transform duration-300 hover:scale-105" 
+          className="object-cover transition-transform duration-500 group-hover:scale-105" 
         />
       </div>
-      <div className="md:col-span-2">
-        {/* ↓ スマートフォン表示(md未満)での文字サイズを調整 */}
-        <h2 className="text-2xl font-bold text-teal-400 md:text-3xl">{title}</h2>
-        {catchphrase && <p className="mt-2 text-base italic text-zinc-400 md:text-lg">{catchphrase}</p>}
-        <p className="mt-4 text-zinc-400">{author} {illustrator && `/ イラスト: ${illustrator}`}</p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <span key={tag} className="rounded-full bg-zinc-700 px-3 py-1 text-xs font-medium text-zinc-300">{tag}</span>
-          ))}
+      <div className="flex h-full flex-col justify-between md:col-span-2">
+        <div>
+          <h2 className="text-2xl font-bold text-teal-400 md:text-3xl">{title}</h2>
+          {catchphrase && <p className="mt-2 text-base italic text-zinc-400 md:text-lg">“{catchphrase}”</p>}
+          
+          <p className="mt-3 text-sm text-zinc-500">
+            作: {author} {illustrator && `/ 画: ${illustrator}`} {design && `/ デザイン: ${design}`}
+          </p>
+          
+          {/* タグデザインの刷新 */}
+          <div className="mt-4 flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <span key={tag} className="rounded-full border border-zinc-700 bg-zinc-800/50 px-3 py-1 text-xs font-medium text-zinc-300 transition-colors group-hover:border-teal-500/30 group-hover:text-teal-300">
+                #{tag}
+              </span>
+            ))}
+          </div>
+
+          <p className="mt-4 leading-relaxed text-zinc-300">
+            {description.split('\n').map((line, i) => <span key={i}>{line}<br/></span>)}
+          </p>
         </div>
-        <p className="mt-4 leading-relaxed text-zinc-300">
-          {description.split('\n').map((line, i) => <span key={i}>{line}<br/></span>)}
-        </p>
-        <div className="mt-6 flex flex-wrap gap-4">
+        
+        <div className="mt-8 flex flex-wrap gap-4">
           {buttons.map((button) => (
             <Button
               key={button.text}
               href={button.href}
               target={button.href ? "_blank" : undefined}
+              variant={button.href ? "primary" : "secondary"} // リンクがあるものを強調
             >
               {button.text}
             </Button>
@@ -95,7 +107,7 @@ export default function ScenariosPage() {
       description: "完全に人でなくなる前に何かを成し遂げたい変貌者と、それにつき合うことになった人間。\nふたりで未練を晴らすために駆け回る２人用シナリオです。\nキットはシナリオが入力されたココフォリアルーム付き。",
       author: "椅子塚サクサク",
       illustrator: "isa",
-      tags: [],
+      tags: ["２人用", "ココフォリア素材付き"],
       buttons: [
         { text: "キットをダウンロード", href: "https://fujimi-trpg-online.jp/archives/001/202510/Metamorphose_s1_KaisoRegret.zip" },
         { text: "トレーラー", href: "https://fujimi-trpg-online.jp/themes/system/images/fileicon/archive.svg" },
@@ -106,7 +118,7 @@ export default function ScenariosPage() {
       description: "人から怪物へと変わりつつある変貌者たちの友人グループが開く、普通じゃないお茶会。\nちょっぴりコミカル、ブラックに遊びたい方向けの２～５人用シナリオです。\nキットはシナリオが入力されたココフォリアルーム付き。",
       author: "椅子塚サクサク",
       illustrator: "翔太郎",
-      tags: [],
+      tags: ["２～５人用", "コミカル"],
       buttons: [
         { text: "キットをダウンロード", href: "https://fujimi-trpg-online.jp/archives/001/202510/Metamorphose_s2_FreaksTeaParty.zip" },
         { text: "トレーラー", href: "https://fujimi-trpg-online.jp/themes/system/images/fileicon/archive.svg" },
@@ -117,7 +129,7 @@ export default function ScenariosPage() {
       description: "やがて生贄となる「神子」と、その世話役であり、最後には命を奪う役割を担う幼馴染の２人用シナリオ。\n因習と怪化現象がかみ合ったことで起きる悲劇を描きます。\n※ルールブック同梱",
       author: "長月",
       illustrator: "南つるよし",
-      tags: [],
+      tags: ["２人用", "和風", "ルールブック同梱"],
       buttons: [
         { text: "トレーラー", href: "https://fujimi-trpg-online.jp/themes/system/images/fileicon/archive.svg" },
       ],
@@ -147,11 +159,18 @@ export default function ScenariosPage() {
   return (
     <PageContainer>
       <h1 className="mb-8 border-b border-zinc-800 pb-4 text-3xl font-bold text-teal-400 md:text-4xl">シナリオ</h1>
-      <div className="space-y-8 md:space-y-16">
+      <div className="space-y-8 md:space-y-12">
         {scenarios.map((scenario, index) => (
           <ScenarioCard key={index} {...scenario} />
         ))}
       </div>
+
+      {/* ↓ 次への導線を追加 */}
+      <NextChapter 
+        title="各種素材をダウンロード" 
+        description="遊びたいシナリオが決まったら、キャラクターシートや部屋素材を準備しましょう。"
+        href="/download"
+      />
     </PageContainer>
   );
 }
