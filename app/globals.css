@@ -3,52 +3,43 @@
 
 /* --- 1. セマンティック変数の定義 --- */
 @theme {
-  /* 色の役割を定義 */
-  --color-bg-primary: #000000;      /* メイン背景：完全な黒 */
-  --color-bg-surface: #18181b;      /* カード等の表面：Zinc-900 */
-  --color-bg-surface-hover: #27272a; /* ホバー時：Zinc-800 */
+  --color-bg-primary: #000000;
+  --color-bg-surface: #18181b;
+  --color-bg-surface-hover: #27272a;
   
-  --color-text-primary: #f4f4f5;    /* メイン文字：Zinc-100 */
-  --color-text-secondary: #a1a1aa;  /* 補足文字：Zinc-400 */
+  --color-text-primary: #f4f4f5;
+  --color-text-secondary: #a1a1aa;
   
-  --color-accent: #2dd4bf;          /* アクセント：Teal-400 */
-  --color-accent-glow: rgba(45, 212, 191, 0.5); /* 発光表現用 */
+  --color-accent: #2dd4bf;
+  --color-accent-glow: rgba(45, 212, 191, 0.5);
 
-  /* フォント変数のマッピング */
   --font-sans: var(--font-noto-sans-jp);
   --font-display: var(--font-oswald);
 }
 
 /* --- 2. 基本設定 --- */
 :root {
-  /* ブラウザの背景色設定（スクロールバウンス時などの色） */
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
   
-  /* スムーズスクロール */
-  scroll-behavior: smooth;
+  /* 修正点: scroll-behavior: smooth; を削除（layout.tsxのクラスで制御するため） */
 }
 
 body {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
   font-family: var(--font-sans), sans-serif;
-  -webkit-font-smoothing: antialiased; /* 文字を滑らかに */
+  -webkit-font-smoothing: antialiased;
 }
 
 /* --- 3. アクセシビリティ設定 --- */
 @layer base {
-  /* キーボードフォーカス時のスタイルを統一 */
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
     border-radius: 0.25rem;
   }
 
-  /* 
-    "視差効果を減らす"設定をオンにしているユーザー向け 
-    アニメーションを一律オフにする配慮
-  */
   @media (prefers-reduced-motion: reduce) {
     * {
       animation-duration: 0.01ms !important;
@@ -62,7 +53,7 @@ body {
     font-weight: 700;
     color: var(--color-accent);
     font-family: var(--font-display), var(--font-sans), sans-serif;
-    letter-spacing: 0.05em; /* 見出しの文字間隔を少し広げる */
+    letter-spacing: 0.05em;
   }
   
   p {

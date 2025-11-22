@@ -3,11 +3,10 @@ import Image from 'next/image';
 import { PageContainer } from '@/components/PageContainer';
 import { Button } from '@/components/ui/Button';
 
-// このコンポーネントは、PCではテーブル行、スマホではカードとして表示されます
+// ... (ResponsiveTableRow コンポーネントは変更なし)
 const ResponsiveTableRow = ({ title, description, href, buttonText }: { title: string, description: string, href: string, buttonText: string }) => {
   return (
     <>
-      {/* PC表示 (md以上) */}
       <tr className="hidden border-b border-zinc-800 last:border-b-0 md:table-row">
         <td className="p-4 font-bold">{title}</td>
         <td className="p-4 text-zinc-400">{description}</td>
@@ -17,7 +16,6 @@ const ResponsiveTableRow = ({ title, description, href, buttonText }: { title: s
           </Button>
         </td>
       </tr>
-      {/* スマートフォン表示 (md未満) */}
       <tr className="block border-b border-zinc-800 last:border-b-0 md:hidden">
         <td className="block p-4">
           <h3 className="font-bold text-zinc-100">{title}</h3>
@@ -33,6 +31,7 @@ const ResponsiveTableRow = ({ title, description, href, buttonText }: { title: s
   );
 };
 
+// ... (DownloadCard コンポーネントは変更なし)
 const DownloadCard = ({ title, description, href, buttonText, imageUrl }: { title: string, description: string, href: string, buttonText: string, imageUrl: string }) => {
   return (
     <div className="rounded-lg border border-zinc-800 bg-black p-6 text-center shadow-md">
@@ -58,7 +57,7 @@ export default function DownloadPage() {
     <PageContainer>
       <h1 className="mb-8 border-b border-zinc-800 pb-4 text-3xl font-bold text-teal-400 md:text-4xl">ダウンロード</h1>
 
-      {/* --- キャラクター管理 --- */}
+      {/* キャラクター管理 */}
       <section className="mb-12">
         <h2 className="mb-4 text-2xl font-bold text-teal-400">キャラクター管理</h2>
         <div className="overflow-hidden rounded-lg border border-zinc-800">
@@ -81,7 +80,7 @@ export default function DownloadPage() {
         </div>
       </section>
 
-      {/* --- その他配布物 --- */}
+      {/* その他配布物 */}
       <section className="mb-12">
         <h2 className="mb-4 text-2xl font-bold text-teal-400">その他配布物</h2>
         <div className="overflow-hidden rounded-lg border border-zinc-800">
@@ -98,9 +97,13 @@ export default function DownloadPage() {
         </div>
       </section>
       
-      {/* --- ココフォリア素材 --- */}
+      {/* ココフォリア素材 */}
       <section>
-        <h2 className="mb-6 text-2xl font-bold text-teal-400">ココフォリア素材</h2>
+        <div className="mb-6 flex items-end justify-between">
+          <h2 className="text-2xl font-bold text-teal-400">ココフォリア素材</h2>
+          {/* ↓ 追加: クレジット表記 */}
+          <p className="text-sm text-zinc-500">ココフォリアデザイン：きこ様</p>
+        </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <DownloadCard
             title="汎用ルーム【明】"
