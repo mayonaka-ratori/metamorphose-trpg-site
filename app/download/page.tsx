@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { PageContainer } from '@/components/PageContainer';
 import { Button } from '@/components/ui/Button';
 
-// ... (ResponsiveTableRow コンポーネントは変更なし)
 const ResponsiveTableRow = ({ title, description, href, buttonText }: { title: string, description: string, href: string, buttonText: string }) => {
   return (
     <>
@@ -31,7 +30,6 @@ const ResponsiveTableRow = ({ title, description, href, buttonText }: { title: s
   );
 };
 
-// ... (DownloadCard コンポーネントは変更なし)
 const DownloadCard = ({ title, description, href, buttonText, imageUrl }: { title: string, description: string, href: string, buttonText: string, imageUrl: string }) => {
   return (
     <div className="rounded-lg border border-zinc-800 bg-black p-6 text-center shadow-md">
@@ -53,6 +51,9 @@ const DownloadCard = ({ title, description, href, buttonText, imageUrl }: { titl
 };
 
 export default function DownloadPage() {
+  // 修正点: 全ての素材ダウンロード先をこのURLに統一
+  const DOWNLOAD_URL = "https://fujimi-trpg-online.jp/download/metamorphose.html";
+
   return (
     <PageContainer>
       <h1 className="mb-8 border-b border-zinc-800 pb-4 text-3xl font-bold text-teal-400 md:text-4xl">ダウンロード</h1>
@@ -66,7 +67,7 @@ export default function DownloadPage() {
               <ResponsiveTableRow
                 title="キャラクターシート"
                 description="印刷して使えるＰＤＦです"
-                href="https://fujimi-trpg-online.jp/media-download/31/5ce895e7d11cdafd/PDF/"
+                href={DOWNLOAD_URL} // リンク修正
                 buttonText="ダウンロード"
               />
               <ResponsiveTableRow
@@ -89,7 +90,7 @@ export default function DownloadPage() {
               <ResponsiveTableRow
                 title="ルールまとめ"
                 description="すぐ参照できる、印刷もできるＰＤＦです"
-                href="https://fujimi-trpg-online.jp/media-download/32/cc1dee14513c59a0/PDF/"
+                href={DOWNLOAD_URL} // リンク修正
                 buttonText="ダウンロード"
               />
             </tbody>
@@ -101,28 +102,27 @@ export default function DownloadPage() {
       <section>
         <div className="mb-6 flex items-end justify-between">
           <h2 className="text-2xl font-bold text-teal-400">ココフォリア素材</h2>
-          {/* ↓ 追加: クレジット表記 */}
           <p className="text-sm text-zinc-500">ココフォリアデザイン：きこ様</p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <DownloadCard
             title="汎用ルーム【明】"
             description="明るい雰囲気のセッションで使える汎用ルームデータです。"
-            href="/metam_ccfolia_light.zip"
+            href={DOWNLOAD_URL} // リンク修正
             buttonText="ダウンロード"
             imageUrl="/ccfolia-light.jpg"
           />
           <DownloadCard
             title="汎用ルーム【クール】"
             description="クールで都会的な雰囲気の汎用ルームデータです。"
-            href="/metam_ccfolia_cool.zip"
+            href={DOWNLOAD_URL} // リンク修正
             buttonText="ダウンロード"
             imageUrl="/ccfolia-cool.jpg"
           />
           <DownloadCard
             title="汎用ルーム【ダーク】"
             description="ダークでシリアスな雰囲気の汎用ルームデータです。"
-            href="/metam_ccfolia_dark.zip"
+            href={DOWNLOAD_URL} // リンク修正
             buttonText="ダウンロード"
             imageUrl="/ccfolia-dark.jpg"
           />
